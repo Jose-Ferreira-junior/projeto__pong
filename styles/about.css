@@ -1,0 +1,57 @@
+.container__about{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.about__titulo{
+    font-size: 38px;
+    margin-top: 8rem;
+
+}
+
+.about__titulo-secundario{
+    font-size: 25px;
+    gap: 2.5rem;
+}
+
+.about__titulo-paragrafo{
+    font-size: 27px;
+    font-family: var(--fonte-secundaria);
+    padding: 3.5rem;
+}
+
+.imagem__jogos{
+    width: 30%;
+}
+
+.container__referencias{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    margin-top: 10rem;
+}
+
+.container__criadores{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10rem;
+    gap: 5rem;
+}
+
+.criadores__about{
+    font-size: 20px;
+}
+
+.criadores__about-lista{
+    font-family: var(--fonte-secundaria);
+    font-size: 27px;
+    list-style-type: disc;
+}
+
+.criadores__imagem{
+    width: 40%;
+    margin-bottom: 6rem;
+}

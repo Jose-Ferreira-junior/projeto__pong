@@ -1,0 +1,24 @@
+.container__jogo{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    margin-top: 5rem;
+}
+
+.container__jogo__titulo{
+    font-size: 25px;
+}
+
+.container__jogo__paragrafo{
+    font-size: 27px;
+    font-family: var(--fonte-secundaria);
+    font-weight: 500;
+    margin-top: 5rem;
+}
+
+.container__jogo__pong{
+    border: 2px dashed #FFFF;
+    display: block;
+    margin: 6rem auto;
+}

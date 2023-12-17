@@ -1,0 +1,24 @@
+.cabecalho{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+    background-color: var(--cor-secundaria);
+    padding: 1rem 0 1rem 0;
+    
+}
+
+.botoes__cabecalho{
+    text-decoration: none;
+    color: var(--cor-primaria);
+    align-items: center;
+    border: solid 0.3rem var(--cor-primaria);
+    padding: 1rem;
+}
+
+.botoes__cabecalho:hover{
+    background-color: var(--cor-primaria);
+    color: var(--cor-secundaria);
+    border: dashed 0.3rem var(--cor-primaria);
+    transition: 0.5s;
+}

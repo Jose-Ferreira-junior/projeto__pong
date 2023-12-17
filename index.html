@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PongPortal</title>
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="cabecalho">
+        <a class="botoes__cabecalho" href="/index.html">Pong</a>
+        <a class="botoes__cabecalho" href="./pages/about.html">About</a>
+        <a class="botoes__cabecalho" href="/pages/developer.html">Developer</a>
+    </header>
+    
+    <section class="container__titulo">
+        <h1 class="titulo__principal">Bem-vindo ao Mundo do Pong!</h1>
+        <p class="titulo__principal__paragrafo">Explore a nostalgia dos primórdios dos videogames conosco enquanto mergulhamos no clássico atemporal - o jogo Pong! Nosso site é seu guia interativo para entender e apreciar este ícone dos jogos eletrônicos.</p>
+        <h2 class="titulo__secundario">Regras</h2>
+        <p class="titulo__secundario__paragrafo"><strong class="marca__texto">Objetivo:</strong> Rebata a bola com sua raquete e faça-a passar pela raquete adversária.<br> Cada vez que a bola ultrapassa a raquete do oponente, você marca um ponto!</p>
+        <p class="titulo__secundario__paragrafo"><strong class="marca__texto">Controles:</strong> Use as setas direcionais (ou toque, se estiver em um dispositivo móvel) para movimentar sua raquete para cima e para baixo. Mantenha-se ágil para interceptar a bola!</p>
+        <p class="titulo__secundario__paragrafo"><strong class="marca__texto">Vitória:</strong> O primeiro jogador a atingir um determinado número de pontos é o vencedor.<br> Mantenha-se focado e refine suas habilidades para alcançar a supremacia no Pong!</p>
+    </section>
+
+    <section class="container__jogo">
+
+        <h2 class="container__jogo__titulo">Jogue Agora</h2>
+        <p class="container__jogo__paragrafo">Experimente o Pong diretamente em nosso site! Reviva a magia do Pong com uma versão moderna, mantendo a essência clássica, seja você um veterano dos jogos ou alguém que está descobrindo o Pong pela primeira vez, nosso site é o seu portal para a emoção simples e envolvente deste clássico inesquecível.</p>
+        <canvas class="container__jogo__pong" id="pongCanvas" width="800" height="400"></canvas>
+            <script>
+                const canvas = document.getElementById("pongCanvas");
+                const ctx = canvas.getContext("2d");
+
+                
+
+                const larguraRaquete = 15, alturaRaquete = 80;
+                let posicaoRaqueteEsquerda = canvas.height / 2 - alturaRaquete / 2;
+                let posicaoRaqueteDireita = canvas.height / 2 - alturaRaquete / 2;
+
+                const raqueteEsquerdaSpeed = 10;
+                const raqueteDireitaSpeed = 10;
+
+                let posicaoBolaX = canvas.width / 2;
+                let posicaoBolaY = canvas.height / 2;
+                let velocidadeBolaX = 5;
+                let velocidadeBolaY = 5;
+
+                function desenharRaquetes() {
+                ctx.fillStyle = "#FFFF";
+                ctx.fillRect(0, posicaoRaqueteEsquerda, larguraRaquete, alturaRaquete);
+                ctx.fillRect(canvas.width - larguraRaquete, posicaoRaqueteDireita, larguraRaquete, alturaRaquete);
+                }
+
+                function desenharBola() {
+                ctx.beginPath();
+                ctx.arc(posicaoBolaX, posicaoBolaY, 7, 0, Math.PI * 2);
+                ctx.fillStyle = "#FFFF";
+                ctx.fill();
+                ctx.closePath();
+                }
+
+                function desenhar() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                desenharRaquetes();
+                desenharBola();
+
+                posicaoBolaX += velocidadeBolaX;
+                posicaoBolaY += velocidadeBolaY;
+
+                if (posicaoBolaY + 5 > canvas.height || posicaoBolaY - 5 < 0) {
+                    velocidadeBolaY = -velocidadeBolaY;
+                }
+
+                // Verificar colisões com as raquetes
+                if (
+                    (posicaoBolaX - 5 < larguraRaquete && posicaoBolaY > posicaoRaqueteEsquerda && posicaoBolaY < posicaoRaqueteEsquerda + alturaRaquete) ||
+                    (posicaoBolaX + 5 > canvas.width - larguraRaquete && posicaoBolaY > posicaoRaqueteDireita && posicaoBolaY < posicaoRaqueteDireita + alturaRaquete)
+                ) {
+                    velocidadeBolaX = -velocidadeBolaX;
+
+                    // Ajustar a posição da bola para evitar colisões múltiplas consecutivas
+                    posicaoBolaX = Math.min(canvas.width - larguraRaquete - 5, Math.max(larguraRaquete + 5, posicaoBolaX));
+                }
+
+                if (posicaoBolaX - 5 < 0 || posicaoBolaX + 5 > canvas.width) {
+                    // Reiniciar a posição da bola no meio
+                    posicaoBolaX = canvas.width / 2;
+                    posicaoBolaY = canvas.height / 2;
+
+                    // Definir uma nova velocidade aleatória para a bola
+                    velocidadeBolaX = Math.random() > 0.5 ? 5 : -5;
+                    velocidadeBolaY = Math.random() > 0.5 ? 5 : -5;
+                }
+
+                // Mover a raquete direita com as setas de cima e baixo
+                if (isKeyDown("-")) {
+                    posicaoRaqueteDireita -= raqueteDireitaSpeed;
+                }
+                if (isKeyDown("+")) {
+                    posicaoRaqueteDireita += raqueteDireitaSpeed;
+                }
+
+                // Mover a raquete esquerda com as teclas W e S
+                if (isKeyDown("q")) {
+                    posicaoRaqueteEsquerda -= raqueteEsquerdaSpeed;
+                }
+                if (isKeyDown("a")) {
+                    posicaoRaqueteEsquerda += raqueteEsquerdaSpeed;
+                }
+
+                // Impedir que as raquetes saiam da tela
+                posicaoRaqueteDireita = Math.max(0, Math.min(canvas.height - alturaRaquete, posicaoRaqueteDireita));
+                posicaoRaqueteEsquerda = Math.max(0, Math.min(canvas.height - alturaRaquete, posicaoRaqueteEsquerda));
+
+                requestAnimationFrame(desenhar);
+                }
+
+                function isKeyDown(key) {
+                return keyState[key] === true;
+                }
+
+                const keyState = {};
+
+                window.addEventListener("keydown", function (event) {
+                keyState[event.key] = true;
+                });
+
+                window.addEventListener("keyup", function (event) {
+                keyState[event.key] = false;
+                });
+
+                desenhar();
+            </script>
+
+    </section>
+    
+</body>
+
+<footer class="rodape">
+    <h2 class="rodape__titulo">Development by José</h2>
+</footer>
+
+</html>

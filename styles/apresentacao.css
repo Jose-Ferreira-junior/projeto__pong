@@ -1,0 +1,33 @@
+.container__titulo{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.titulo__principal{
+    font-size: 38px;
+}
+
+.titulo__secundario{
+    font-size: 25px;
+}
+
+.titulo__principal__paragrafo{
+    font-size: 27px;
+    font-family: var(--fonte-secundaria);
+    font-weight: 500;
+}
+
+.titulo__secundario__paragrafo{
+    font-size: 27px;
+    font-family: var(--fonte-secundaria);
+    font-weight: 500;
+}
+
+.marca__texto{
+    font-family: var(--fonte-primaria);
+    font-size: 20px;
+    font-weight: 500;
+}

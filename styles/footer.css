@@ -1,0 +1,17 @@
+.rodape{
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background-color: var(--cor-secundaria);
+    
+}
+
+.rodape__titulo{
+    display: flex;
+    color: var(--cor-primaria);
+    align-items: center;
+    font-size: 38px;
+    margin-left: 37rem;
+
+}
